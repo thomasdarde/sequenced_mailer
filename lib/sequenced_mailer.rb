@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require_relative "sequenced_mailer/version"
-
+require "rails"
+require_relative "../app/models/mailing"
+require_relative "../app/models/mailing/sequence"
 module SequencedMailer
   class Error < StandardError; end
-  # Your code goes here...
+  Mailing::Sequence
+  Mailing::SequenceOwner
 end
