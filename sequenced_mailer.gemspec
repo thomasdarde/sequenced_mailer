@@ -35,6 +35,11 @@ Gem::Specification.new do |spec|
   # Uncomment to register a new dependency of your gem
   spec.add_runtime_dependency "rails", "~> 7.0"
 
+  spec.add_development_dependency "rubocop-performance", "~> 1.11"
+  spec.add_development_dependency "rubocop-rails", "~> 2.10"
+  spec.add_development_dependency "rubocop-rspec", "~> 2.1"
+  spec.add_development_dependency "standard", "~> 1.29"
+
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 end
