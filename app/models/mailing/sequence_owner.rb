@@ -1,4 +1,4 @@
-class Mailing::SequenceOwner < ApplicationRecord
+class Mailing::SequenceOwner < ActiveRecord::Base
   belongs_to :sequence, class_name: "Mailing::Sequence", foreign_key: "mailing_sequence_id", inverse_of: :sequence_owners
   belongs_to :owner, polymorphic: true
   delegate :steps, to: :sequence

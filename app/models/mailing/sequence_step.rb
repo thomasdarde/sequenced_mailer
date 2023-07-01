@@ -1,4 +1,4 @@
-class Mailing::SequenceStep < ApplicationRecord
+class Mailing::SequenceStep < ActiveRecord::Base
   belongs_to :sequence, class_name: "Mailing::Sequence", foreign_key: "mailing_sequence_id", inverse_of: :steps
 
   def ready_to_send?(last_activity_at)

@@ -1,4 +1,4 @@
-class Mailing::Sequence < ApplicationRecord
+class Mailing::Sequence < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   has_many :sequence_owners, class_name: "Mailing::SequenceOwner", dependent: :destroy, inverse_of: :sequence, foreign_key: "mailing_sequence_id"
