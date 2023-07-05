@@ -6,6 +6,10 @@ class Mailing::SequenceStep < ActiveRecord::Base
     last_activity_at.beginning_of_day + days_after_last_step.days <= Time.zone.now
   end
 
+  def ready_at(last_activity_at)
+    (last_activity_at.beginning_of_day + days_after_last_step.days).to_date
+  end
+
   def send_to_owner(sequence_owner)
     # on a un scheduler qui appel les mails à envoyer les jours ouvrés
     #

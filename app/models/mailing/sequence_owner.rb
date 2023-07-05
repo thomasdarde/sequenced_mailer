@@ -4,7 +4,7 @@ class Mailing::SequenceOwner < ActiveRecord::Base
   delegate :steps, to: :sequence
   after_create :send_next_step_if_ready
 
-  delegate :name, to: :next_step, prefix: true
+  delegate :name, :ready_at, to: :next_step, prefix: true
   delegate :name, to: :owner, prefix: true
   delegate :name, to: :sequence, prefix: true
 
@@ -17,7 +17,15 @@ class Mailing::SequenceOwner < ActiveRecord::Base
   end
 
   def description
-    ["Sequence: #{sequence_name}", "Owner: #{owner_name}", "Step: #{next_step_name}"].join(" - ")
+    desc = ["Sequence: #{sequence_name}", "Owner: #{owner_name}"]
+    desc << "Canceled at: #{canceled_at}" if canceled?
+    desc << if last_step?
+      "Finished"
+    else
+      "Next Step : #{next_step_name}, ready to send at: #{I18n.l(next_step_ready_at)}"
+    end
+
+    desc.join(" - ")
   end
 
   def cancel!
@@ -45,6 +53,10 @@ class Mailing::SequenceOwner < ActiveRecord::Base
     return false if canceled?
     return false if last_step?
     next_step.ready_to_send?(last_activity_at)
+  end
+
+  def next_step_ready_at
+    next_step.ready_at(last_activity_at)
   end
 
   def last_step?
