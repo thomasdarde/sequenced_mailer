@@ -9,8 +9,8 @@ class Mailing::SequenceOwner < ActiveRecord::Base
   delegate :name, to: :sequence, prefix: true
 
   def owner_name
-    if owner.respond_to?(:full_name)
-      owner.full_name
+    if owner.respond_to?(:mailing_sequence_owner_description)
+      owner.mailing_sequence_owner_description
     else
       owner.name
     end
