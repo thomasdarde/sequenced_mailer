@@ -19,23 +19,4 @@ class Mailing::Sequence < ActiveRecord::Base
       end
     end
   end
-
-  def self.sequences_and_steps_names
-    {"onboarding_admin_sigilium" => {user_promoted: 0},
-     "onboarding_sigilium" => {welcome: 1},
-     "subscription_failed_payment" => {first_alert: 1}}
-  end
-
-  def self.seed
-    sequences_and_steps_names.each do |sequence_name, steps_details|
-      sequence = Mailing::Sequence.find_or_create_by(name: sequence_name)
-      steps_details.each.with_index do |step_details, index|
-        step_name, days_after_last_step = step_details
-        step = sequence.steps.find_or_initialize_by(name: step_name)
-        step.days_after_last_step = days_after_last_step
-        step.position = index + 1
-        step.save!
-      end
-    end
-  end
 end
