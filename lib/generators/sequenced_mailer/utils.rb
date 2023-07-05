@@ -15,8 +15,8 @@ module SequencedMailer
         end
 
         def ask_boolean(wording, _default_value = nil)
-          value = ask_for(wording, 'Y')
-          value = (value == 'Y')
+          value = ask_for(wording, "Y")
+          (value == "Y")
         end
       end
     end

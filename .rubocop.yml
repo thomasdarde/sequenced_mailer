@@ -1,0 +1,70 @@
+require:
+  - standard
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+  - rubocop-capybara
+  - rubocop-factory_bot
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2
+  Exclude:
+    - node_modules/**/*
+    - public/**/*
+    - vendor/**/*
+    - db/**/*
+    - bin/**/*
+
+Rails:
+  Enabled: true # enable rubocop-rails cops
+Rails/OutputSafety:
+  Enabled: false
+Rails/I18nLocaleTexts:
+ Enabled: false
+Rails/Output:
+  Enabled: false
+Style/RedundantRegexpEscape:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+
+RSpec:
+  Enabled: true # enable rubocop-rspec cops
+RSpec/DescribeClass:
+  Enabled: false # ignore missing comments on classes
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/Focus:
+  Enabled: false
+RSpec/FilePath:
+  IgnoreMethods: true
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
+Rails/RakeEnvironment:
+  Enabled: false
+Rails/ApplicationRecord:
+  Enabled: false
+Rails/FindEach:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+RSpec/ImplicitSubject:
+  Enabled: false
+Rails/HelperInstanceVariable:
+  Enabled: false
+RSpec/IndexedLet:
+  Enabled: false

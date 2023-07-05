@@ -7,7 +7,7 @@ module Mailing::Sequenceable
     def add_to_sequence(name)
       logger.debug { "Will try to add to sequence: #{name}" }
       sequence = Mailing::Sequence.find_by(name: name)
-      return unless sequence.present?
+      return if sequence.blank?
 
       if sequence_owners.where(mailing_sequence_id: sequence.id, canceled_at: nil).any?
         logger.debug { "User is already in the sequence" }
@@ -18,7 +18,7 @@ module Mailing::Sequenceable
     end
 
     def cancel_sequence(name)
-      sequence_owner = sequence_owners.joins(:sequence).where(sequence: { name: name }).first
+      sequence_owner = sequence_owners.joins(:sequence).where(sequence: {name: name}).first
       return if sequence_owner.blank?
 
       sequence_owner.cancel!
